@@ -1,6 +1,6 @@
 # node-calvin
-## A Scaffolding for Node.js framework -- Koa2, Combined with ODM framework for MongoDB -- Mongoose and basic configuration of Mongoose. Using ES2015 grammar, RESTful API.
-## 基于Node.js的Koa2框架脚手架，结合了已有基础配置的MongoDB的ODM框架--Mongoose。使用ES2015语法，RESTful风格API。
+## A Scaffolding for Node.js framework -- Koa2, Combined with ODM framework for MongoDB -- Mongoose and basic configuration of Mongoose. Friendly to WeChat APIS. Using ES2015 grammar, RESTful API.
+## 基于Node.js的Koa2框架脚手架，结合了已有基础配置的MongoDB的ODM框架--Mongoose。对微信接口API进行适配。使用ES2015语法，RESTful风格API。
 
 # 启动app
 ```
