@@ -2,7 +2,7 @@
  * 用户表 - user
  * @author Calvin
  * @version 1.0.0
- * 
+ *
  * ----------------------------------------------
  *  字段名       类型          释义          取值
  *  username    String        用户名        微信access_token

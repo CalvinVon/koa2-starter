@@ -3,15 +3,19 @@ const Koa = require('koa');
 const convert = require('koa-convert');
 const json = require('koa-json');
 const bodyparser = require('koa-bodyparser')();
-const logger = require('./lib/logger');
+const logger = require('./middlewares/logger');
 const _ = require("lodash");
 const router = require('koa-router')();
-const users = require('./routes/users');
 const http = require("http");
+
+// routes
+const user = require('./routes/user');
+const wechat = require('./routes/wechat');
 
 const app = new Koa();
 
-// middlewares
+
+// middlewaress
 app.use(convert(bodyparser));
 app.use(convert(json()));
 
@@ -26,13 +30,16 @@ app.use(async (ctx, next) => {
   }
   const responseTime = new Date() - start;
   const logObj = { responseTime };
-  ["method", "url", "res.statusCode", "req.headers"].forEach(n => (logObj[n] = _.get(ctx, n)));
+  ["method", "url", "res.statusCode", "req.headers", "request.body", "request.query", "response.body"].forEach(n => (logObj[n] = _.get(ctx, n)));
   logger.info(logObj);
 });
 
-router.use(users.routes());
-app.use(router.routes(), router.allowedMethods());
+// router.use(users.routes());
 
+router.use('/', user.routes(), user.allowedMethods());
+router.use('/wx', wechat.routes(), wechat.allowedMethods());
+
+app.use(router.routes(), router.allowedMethods());
 
 const server = http.createServer(app.callback());
 if (!module.parent) {

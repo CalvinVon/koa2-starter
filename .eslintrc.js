@@ -20,6 +20,16 @@ module.exports = {
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": ['**/tests/**/*.js'],
     }],
+    "arrow-body-style": 0,
+    "space-before-function-paren": 0,
+    "arrow-parens": 0,
+    "prefer-template": 0,
+    "one-var": 0,
+    "linebreak-style": 0,
+    "no-else-return": 1,
+    "brace-style": 0,
+    "dot-notation": 1
+    
   },
   plugins: [
     // "react"

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const logger = require('../logger');
-const mongos = require('../../settings').mongos;
+const logger = require('../middlewares/logger');
+const mongos = require('../config').mongos;
 
 mongoose.Promise = require('bluebird');
 require('bluebird').promisifyAll(require('mongoose'));

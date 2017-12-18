@@ -1,20 +1,12 @@
 const User = require("../models/user").User;
 const Promise = require('bluebird');
 const joi = require("joi");
-const validation = require("../middleware/validation");
-const extJoi = require("../middleware/joi_ext");
-const router = require('koa-router')();
+const validation = require("../middlewares/validation");
+const extJoi = require("../middlewares/joi_ext");
 const hash = require('password-hash');
 const _ = require("lodash");
 const uuidV4 = require('uuid/v4');
-const auth = require("../middleware/auth")
 
-
-router.prefix = '/user';
-
-router.get('/', async ctx => {
-  ctx.body = await User.find().exec();
-})
 
 // curl "http://localhost:3500/users/"
 // router.get('/users', validation({

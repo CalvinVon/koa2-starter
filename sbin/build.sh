@@ -2,8 +2,8 @@
 
 cd $(cd `dirname $0`;pwd)
 
-docker_host=docker.zhehekeji.com
-name=cloud-charge
+docker_host=xxxxxxx
+name=xxxxxxx
 ver=`date "+%Y%m%d"`
 
 branch='dev'

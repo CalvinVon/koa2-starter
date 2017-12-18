@@ -1,11 +1,11 @@
 const winston = require('winston');
 const moment = require("moment");
 const _ = require("lodash");
-const settings = require("../settings");
+const config = require("../config");
 
 const getTime = () => moment().utcOffset(8).format("YYYY-MM-DD HH:mm:ss");
 const logger = new winston.Logger({});
-if (_.get(settings, "log.console")) {
+if (_.get(config, "log.console")) {
   logger.add(winston.transports.Console, {
     timestamp: getTime,
     json: true,
