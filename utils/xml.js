@@ -105,3 +105,10 @@ exports.jsonToXml = (messageObj) => {
   const xml = header + content;
   return xml;
 };
+
+exports.wxpayReturn = (returnCode = 'SUCCESS', returnMsg = 'OK') => {
+  return `<xml>
+    <return_code><![CDATA[${returnCode}]]></return_code>
+    <return_msg><![CDATA[${returnMsg}]]></return_msg>
+  </xml>`;
+};

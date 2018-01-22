@@ -28,7 +28,13 @@ module.exports = {
     "linebreak-style": 0,
     "no-else-return": 1,
     "brace-style": 0,
-    "dot-notation": 1
+    "dot-notation": 1,
+    "no-trailing-spaces": 1,
+    "consistent-return": 1,
+    "no-unused-vars": 1,
+    "no-return-assign": 0,
+    "max-len": 1,
+    "no-continue": 1
     
   },
   plugins: [

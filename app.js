@@ -2,22 +2,33 @@
 const Koa = require('koa');
 const convert = require('koa-convert');
 const json = require('koa-json');
-const bodyparser = require('koa-bodyparser')();
+const bodyparser = require('koa-bodyparser');
 const logger = require('./middlewares/logger');
 const _ = require("lodash");
 const router = require('koa-router')();
 const http = require("http");
+const serve = require("koa-static");
+const path = require("path");
+const cors = require('koa2-cors');
 
-// routes
-const user = require('./routes/user');
-const wechat = require('./routes/wechat');
+const env = process.env.NODE_ENV || 'development';
 
 const app = new Koa();
 
 
 // middlewaress
-app.use(convert(bodyparser));
+app.use(serve(path.join(__dirname, "/static/")));
+app.use(convert(bodyparser({ multipart: true })));
 app.use(convert(json()));
+app.use(cors({
+  origin(ctx) {
+    return ctx.header.origin;
+  },
+  maxAge: 7200,
+  credentials: true,
+  allowMethods: ['GET', 'POST'],
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}));
 
 // logger and error handler
 app.use(async (ctx, next) => {
@@ -27,17 +38,25 @@ app.use(async (ctx, next) => {
   } catch (error) {
     logger.error('server error', error);
     ctx.status = error.status || 500;
+    if (env === 'development') {
+      ctx.body = error;
+    }
   }
   const responseTime = new Date() - start;
   const logObj = { responseTime };
-  ["method", "url", "res.statusCode", "req.headers", "request.body", "request.query", "response.body"].forEach(n => (logObj[n] = _.get(ctx, n)));
+  ["method", "url", "res.statusCode", "response.body"].forEach(n => (logObj[n] = _.get(ctx, n)));
   logger.info(logObj);
 });
 
-// router.use(users.routes());
+// routes
+const wechat = require('./routes/wx/wechat');
+const userRouter = require('./routes/api/user');
+const devRouter = require('./routes/api/_development');
 
-router.use('/', user.routes(), user.allowedMethods());
+router.redirect('/', '/wx/login');
 router.use('/wx', wechat.routes(), wechat.allowedMethods());
+router.use('/api/dev', devRouter.routes(), devRouter.allowedMethods());
+router.use('/api/user', userRouter.routes(), userRouter.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());
 
@@ -62,4 +81,5 @@ process.on('uncaughtException', (err) => {
     logger.error('error when exit', e.stack);
   }
 });
+
 module.exports = server;

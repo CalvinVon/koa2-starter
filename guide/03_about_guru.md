@@ -18,7 +18,7 @@
 │   └── query.js
 ├── sbin 相关的shell脚本
 │   └── build.sh 构建镜像
-└── settings.js 配置
+└── config.js 配置
 ```
 # 主要用到的库/模块
 * [Koa](http://koajs.com/) web框架

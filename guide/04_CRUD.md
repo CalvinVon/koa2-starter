@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 ```
 [mongo/index.js](../lib/mongo/index.js) 定义了Proxy。
 可以在访问属性时动态找到对应的数据库配置并做Mongo连接返回Mongo连接
-配置在`settings.js`中定义，`settings.js`会根据当前`NODE_ENV`环境变量读取相应的配置
+配置在`config.js`中定义，`config.js`会根据当前`NODE_ENV`环境变量读取相应的配置
 
 
 # Schema 定义

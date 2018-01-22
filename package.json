@@ -1,20 +1,17 @@
 {
-  "name": "cloud-chargeu",
+  "name": "koa2-calvin",
   "version": "1.0.0",
-  "description": "云充小站微信端后台",
+  "description": "Koa2脚手架",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "dev": "set NODE_ENV=development&& nodemon app.js",
-    "local": "set NODE_ENV=local&& nodemon app.js",
-    "lint": "eslint --fix",
-    "test": "set NODE_ENV=test_local ava -v",
-    "cov": "nyc report --reporter=html",
-    "test:cov": "NODE_ENV=test_local nyc ava -v && npm run cov"
+    "dev": "cross-env NODE_ENV=development&& nodemon app.js",
+    "dev:local": "cross-env NODE_ENV=local&& nodemon app.js",
+    "test": "cross-env NODE_ENV=test&&forever stopall&&forever start app.js"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@phabricator.qingzhoudata.com/diffusion/39/node-guru.git"
+    "url": "xxxxxxxxxxxxxx"
   },
   "keywords": [
     "nodejsv7",
@@ -25,6 +22,7 @@
   "dependencies": {
     "ava": "^0.18.2",
     "bluebird": "^3.4.6",
+    "crypto": "^1.0.1",
     "ding-load-dir": "^1.0.0",
     "joi": "^9.2.0",
     "koa": "^2.0.0",
@@ -33,6 +31,8 @@
     "koa-cookie": "^1.0.0",
     "koa-json": "^1.1.1",
     "koa-router": "^7.0.0",
+    "koa-static": "^4.0.2",
+    "koa2-cors": "^2.0.5",
     "lodash": "^4.16.6",
     "moment": "^2.15.2",
     "mongoose": "^4.6.6",
@@ -41,6 +41,7 @@
     "supertest": "^3.0.0",
     "supertest-as-promised": "^4.0.2",
     "uuid": "^3.0.1",
+    "wechat-pay": "^0.3.2",
     "winston": "^2.3.0",
     "xml2js": "^0.4.19"
   },
@@ -48,7 +49,8 @@
     "eslint": "^3.9.1",
     "eslint-config-airbnb-base": "^9.0.0",
     "eslint-plugin-import": "^2.0.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "cross-env": "^5.1.3"
   },
   "ava": {
     "files": [

@@ -11,6 +11,8 @@
 const _ = require('lodash');
 const joi = require("joi");
 
+const resFormat = require('../utils/resFormatter').resFormat;
+
 module.exports = schema => (ctx, next) => {
   const pickedCtx = {};
   const mappings = {
@@ -26,14 +28,21 @@ module.exports = schema => (ctx, next) => {
     allowUnknown: true
   }, (err, newCtx) => {
     if (err) {
-      ctx.status = 400;
-      ctx.body = {
-        errors: err.details.map(d => ({
+      // ctx.status = 400;
+      // ctx.body = {
+      //   errors: err.details.map(d => ({
+      //     message: d.message,
+      //     type: d.type,
+      //     path: d.path
+      //   }))
+      // };
+      ctx.body = resFormat({}, 1,
+        err.details.map(d => ({
           message: d.message,
           type: d.type,
           path: d.path
         }))
-      };
+      );
       return false;
     }
     Object.keys(newCtx).forEach((k) => {

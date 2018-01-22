@@ -1,10 +1,16 @@
-// const User = require("../models/user").User;
+const resFormat = require('../utils/resFormatter').resFormat;
+const util = require('../utils/util');
+const Promise = require('bluebird');
+const moment = require('moment');
 
+// models
+const User = require('../models/user').User;
 
-exports.findUser = (ctx) => {
-  ctx.body = 'u findUser haha';
-};
+// services
+const ChargeOrderService = require('../services/chargeOrderService');
 
-exports.getMe = (ctx) => {
-  ctx.body = 'u getMe';
+exports.getUserBalance = async ctx => {
+  const uid = ctx.userid;
+
+  ctx.body = resFormat(await User.getBalance(uid));
 };

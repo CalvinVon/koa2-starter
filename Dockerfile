@@ -1,6 +1,6 @@
 FROM node:7.6
 # author
-MAINTAINER fengjiahui <fengjiahui@zhehekeji.com>
+MAINTAINER calvin <vip935721016@163.com>
 
 COPY ./package.json /tmp/package.json
 RUN  npm i --production -verbose
